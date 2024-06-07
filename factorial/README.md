@@ -1,0 +1,1 @@
+Doing factorials to really get a feel for recursion, which I have understood conceptually, but struggle to do in practice. I am most comfortable with typescript, and am hoping to learn go/lua as well.
