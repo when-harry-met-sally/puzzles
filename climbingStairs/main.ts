@@ -22,17 +22,55 @@
 // 2. 1 step + 2 steps
 // 3. 2 steps + 1 step
 
+
 const steps = [1, 2];
-let target = 3;
-
-const a = (p = 0) => {
-  steps.forEach(s => {
-    const newHeight = a(p + s);
-    if (newHeight > target) {
-
+let target = 2;
+const ways = []
+steps.forEach(a => {
+  let level = 0;
+  level += a
+  steps.forEach(b => {
+    level += b;
+    if (level === target) {
+      ways.push([a, b])
     }
   })
+})
+//
+//
+// console.log(ways)
+
+// Apperently this is just the fibonnaci sequence with a different base.
+
+const bigStepper = (n: number) => {
+  if (n <= 1) {
+    return 1
+  }
+
+  const s = [0, 1, 2];
+  for (let i = 3; i <= n; i++) {
+    s[i] = s[i - 1] + s[i - 2]
+  }
+
+  return s[n]
 }
 
-a()
+const m: Record<number, number> = {}
+const bigStepper2 = (n: number) => {
+  // base
 
+  // could memoize but I think that's a downside.
+  if (n <= 1) {
+    return 1;
+  } else {
+    if (m[n] !== undefined) {
+      return m[n]
+    }
+    m[n] = bigStepper2(n - 1) + bigStepper2(n - 2)
+    return m[n]
+  }
+}
+
+console.log(bigStepper(3))
+
+console.log(bigStepper2(3))
