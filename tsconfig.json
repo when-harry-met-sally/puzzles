@@ -1,3 +1,22 @@
 {
-  "strict": false
+  "compilerOptions": {
+    "target": "es6", // Set the JavaScript version for output files
+    "module": "commonjs", // CommonJS modules for Node.js compatibility
+    "outDir": "./dist", // Redirect output structure to the directory
+    "rootDir": "./", // Specify the root directory of input files
+    "strict": false, // Enable all strict type-checking options
+    "esModuleInterop": true, // Enables compatibility with non-ES module spec compliant imports
+    "skipLibCheck": true, // Skip type checking of declaration files (*.d.ts)
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
+    "noImplicitReturns": true, // Report error when not all code paths in function return a value
+    "noUnusedLocals": true, // Report errors on unused locals
+    "noUnusedParameters": true // Report errors on unused parameters
+  },
+  "include": [
+    "*/**/*.ts" // Include all TypeScript files in all subdirectories
+  ],
+  "exclude": [
+    "node_modules", // Standard practice to exclude node_modules
+    "**/*.spec.ts" // Exclude test files if any
+  ]
 }
