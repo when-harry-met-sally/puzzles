@@ -85,26 +85,24 @@ const get4Points = (r: number[]) => {
   return [{ x: r[0], y: r[1] }, { x: r[0], y: r[3] }, { x: r[2], y: r[1] }, { x: r[2], y: r[3] }]
 }
 const doRectanglesOverlap = (r: number[][]) => {
-  let intersect = [];
-  for (let i = 0; i < r.length - 1; i++) {
+  for (let i = 0; i < r.length; i++) {
     const shape1 = r[i];
-    const p1 = get4Points(shape1)
-    for (let j = i + 1; j < r.length; j++) {
+    for (let j = 0; j < r.length; j++) {
+      if (i == j) {
+        continue
+      }
       const shape2 = r[j];
       const p2 = get4Points(shape2)
-      for (const p of p1) {
-        if (p.x < p2[0].x && p.x < p2[3].x && p.y > p2[2].y && p.y < p2[3].y) {
-          console.log(p)
-          console.log(p2)
-          console.log('intersect')
-          intersect.push(p)
-          break
-        }
+
+      const intersections = p2.filter((p) => p.x >= shape1[0] && p.x <= shape1[2] && p.y >= shape1[1] && p.y <= shape1[3])
+      console.log(intersections.length)
+      if (intersections.length > 2) {
+        return true
       }
+
     }
   }
-  console.log(intersect)
-  return !!intersect.length;
+  return false;
 }
 
 function isRectangleCover(rectangles: number[][]): boolean {
@@ -112,6 +110,7 @@ function isRectangleCover(rectangles: number[][]): boolean {
   if (overlap) {
     return false;
   }
+  console.log('It does not intersect')
   const m = [null, null, null, null]
   let t = 0;
   for (const r of rectangles) {
@@ -143,7 +142,20 @@ function isRectangleCover(rectangles: number[][]): boolean {
 
 // The issue is overlap.
 // THe bounding box has the same area as the individual squares, but there is overlap.
-const rectangles = [[1, 1, 3, 3], [3, 1, 4, 2], [3, 2, 4, 4], [1, 3, 2, 4], [2, 3, 3, 4]]
-
+const rectangles = [[0, 1, 3, 2], [1, 0, 2, 2]];
 
 console.log(isRectangleCover(rectangles))
+
+console.log('----')
+const interectors = (r: number[][]) => {
+  const a = r[0]
+  const b = r[1]
+
+  const intersectors = [{ x: a[0], y: b[1] }, { x: a[0], y: b[3] }, { x: b[0], y: a[1] }, { x: b[0], y: a[3] }]
+
+  console.log(intersectors)
+
+
+}
+
+interectors(rectangles)
