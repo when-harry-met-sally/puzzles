@@ -12,7 +12,9 @@ let two_sum nums target =
     if i >= Array.length nums then
       None
     else
-      let complement = target - nums.(i) in
+      let 
+
+      complement = target - nums.(i) in
       match IntHashtbl.find_opt table complement with
       | Some index -> Some (index, i)
       | None ->

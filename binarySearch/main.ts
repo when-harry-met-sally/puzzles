@@ -1,27 +1,15 @@
-function search(nums: number[], target: number, baseIndex: number = 0): number {
-  const length = nums.length;
-  if (length === 1) {
-    if (nums[0] !== target) {
-      return -1
-    } else {
-      return 0;
-    }
+function binarySearch(arr: number[], target: number, left: number = 0, right: number = arr.length - 1): number {
+  if (left > right) {
+    return -1; // Base case: target is not found
   }
-  const m = Math.floor(length / 2)
 
-  const val = nums[m];
-  console.log(nums)
-  console.log('m', m)
-  console.log('val', val)
-  if (val < target) {
-    const t = search(nums.slice(m + 1, nums.length), target)
-    return t === -1 ? -1 : baseIndex + m + 1
-  } else if (val > target) {
-    const t = search(nums.slice(0, m), target)
-    return t === -1 ? -1 : m - t
-  } else if (val === target) {
-    return m;
+  const mid = Math.floor((left + right) / 2);
+
+  if (arr[mid] === target) {
+    return mid; // Target found, return index
+  } else if (arr[mid] < target) {
+    return binarySearch(arr, target, mid + 1, right); // Recur on the right half
+  } else {
+    return binarySearch(arr, target, left, mid - 1); // Recur on the left half
   }
-};
-
-console.log(search([-1, 0, 3, 5, 9, 12, 13], -1))
+}
