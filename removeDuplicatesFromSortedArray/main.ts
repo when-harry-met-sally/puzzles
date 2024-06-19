@@ -1,13 +1,18 @@
 function removeDuplicates(nums: number[]): number {
+  if (nums.length === 0) return 0;
+
+  let j = 1;
   for (let i = 1; i < nums.length; i++) {
-    if (nums[i] === nums[i - 1]) {
-      nums.splice(i - 1, 1)
-      i--
+    if (nums[i] !== nums[i - 1]) {
+      nums[j] = nums[i];
+      j++;
     }
-  };
-
-  console.log(nums)
+  }
+  return j;
 }
-const arr = [1, 1, 1, 1, 2, 2];
-removeDuplicates(arr)
 
+// Example usage:
+const nums = [1, 1, 2, 3, 3, 3, 4, 5, 5];
+const newLength = removeDuplicates(nums);
+console.log(newLength); // Output: 5
+console.log(nums.slice(0, newLength)); // Output: [1, 2, 3, 4, 5]

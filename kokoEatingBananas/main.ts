@@ -16,9 +16,26 @@ const searchIterative = (arr: number[], target: number): number => {
 };
 
 function minEatingSpeed(piles: number[], h: number): number {
-  for (let i = 0; i < piles[0]; i++) {
-    console.log(i)
+  const max = Math.max(...piles);
+  for (let i = 1; i <= max; i++) {
+    const res = eatTest(piles, h, i)
+    if (res) {
+      return i - 1
+    }
   }
+  return -1
 };
 
-minEatingSpeed([3, 6, 7, 11], 8)
+
+const eatTest = (piles: number[], h: number, k: number) => {
+  let hours = 0;
+  for (const pile of piles) {
+    hours += Math.ceil(pile / k);
+  }
+  return hours <= h;
+}
+
+const res = minEatingSpeed([3, 6, 7, 11], 8)
+console.log(res)
+
+const res = [].find()
