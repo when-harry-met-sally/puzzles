@@ -14,3 +14,5 @@ function topKFrequent(nums: number[], k: number): number[] {
 
 console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2))
 // Don't think this is as efficient as it could be, we are sorting out of lazyness, but we really should just find the K top, which is log n?
+
+
