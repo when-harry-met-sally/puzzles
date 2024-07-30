@@ -10,6 +10,8 @@ removeElement :: (Eq a) => [a] -> a -> [a]
 removeElement xs r = go xs r []
   where
     go [] _ acc = reverse acc
+      where
+        mid = (right - left)
     go (x : xs) r acc
       | x == r = go xs r acc
       | otherwise = go xs r (x : acc)

@@ -1,0 +1,36 @@
+-- import Data.List (sort)
+--
+-- mergeSort :: (Ord a) => [a] -> [a]
+-- mergeSort arr = go arr 0 (length arr - 1)
+--   where
+--     go :: (Ord a) => [a] -> Int -> Int -> [a]
+--     go arr left right
+--       | left == right = [arr !! left]
+--       | otherwise = sort ((go arr left mid) ++ (go arr (mid + 1) right))
+--       where
+--         mid = (right + left) `div` 2
+--
+-- main :: IO ()
+-- main = print $ mergeSort [5, 3, 1, 2, 5]
+--
+-- This was obviously silly. I'm using the built in sort to sort...
+
+-- mergeSort :: (Ord a) => [a] -> [a]
+-- mergeSort [] = []
+-- mergeSort [x] = [x]
+-- mergeSort arr = merge (mergeSort left) (mergeSort right)
+--   where
+--     mid = length arr `div` 2
+--     (left, right) = splitAt mid arr
+--
+--     merge :: (Ord a) => [a] -> [a] -> [a]
+--     merge [] ys = ys
+--     merge xs [] = xs
+--     merge (x : xs) (y : ys)
+--       | x <= y = x : merge xs (y : ys)
+--       | otherwise = y : merge (x : xs) ys
+--
+-- main :: IO ()
+-- main = print $ mergeSort [5, 3, 1, 2, 5]
+
+-- n log in
