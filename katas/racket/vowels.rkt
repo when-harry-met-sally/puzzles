@@ -11,4 +11,4 @@
            0
            chars)))
 
-(count-vowels "MIles") ; => 2
+(count-vowels "MIles")
