@@ -9,4 +9,4 @@
              (make-hash)
              words))))
 
-(count-frequency "test my name")
+(count-frequency "test my n")
