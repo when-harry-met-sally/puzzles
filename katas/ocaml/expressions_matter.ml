@@ -25,4 +25,3 @@ let expression_matter a b c =
   | hd::rest -> List.fold_left max hd rest
 
 let () = expression_matter 1 2 3 |> string_of_int |> print_endline
-
