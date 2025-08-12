@@ -41,11 +41,21 @@ let get_buckets (arr : int list) (k : int) =
   let x = Array.to_list buckets |> List.flatten |> List.rev in
   take x k
 
-let () =
-  let x = get_buckets [ 1; 3; 3; 3; 2; 3 ] 1 in
-  List.iter (fun c -> c |> string_of_int |> print_endline) x
+let top_k (arr : int list) k =
+  let frq = count arr in
+  (* find max frequency for correct array size *)
+  let max_freq = Hashtbl.fold (fun _ v acc -> max v acc) frq 0 in
+  let buckets = Array.make (max_freq + 1) [] in
+  (* bucket elements by frequency *)
+  Hashtbl.iter (fun key freq -> buckets.(freq) <- key :: buckets.(freq)) frq;
+  (* flatten from highest frequency down, then take top k *)
+  Array.to_list buckets |> List.rev |> List.flatten |> fun lst ->
+  let rec take n acc = function
+    | [] -> List.rev acc
+    | _ when n = 0 -> List.rev acc
+    | x :: xs -> take (n - 1) (x :: acc) xs
+  in
+  take k [] lst
 
-(* := is for refs *)
-(* <- is for assignment and record fields *)
-
-(* We could track max occurance for the sake of saving sapce on teh array, but its not worth*)
+let res = top_k [ 1; 1; 1; 2; 2; 3; 3 ] 2
+let () = List.iter (fun a -> a |> string_of_int |> print_endline) res
